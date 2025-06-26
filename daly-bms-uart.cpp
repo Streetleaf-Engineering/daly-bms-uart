@@ -530,7 +530,7 @@ bool Daly_BMS_UART::receiveBytes(void)
     memset(this->my_rxBuffer, 0, XFER_BUFFER_LENGTH);
 
     // Read bytes from the specified serial interface
-    uint8_t rxByteNum = this->my_serialIntf->readBytes(this->my_rxBuffer, XFER_BUFFER_LENGTH);
+    uint8_t rxByteNum = this->my_serialIntf->readBytes(reinterpret_cast<char*>(this->my_rxBuffer), XFER_BUFFER_LENGTH);
 
     // Make sure we got the correct number of bytes
     if (rxByteNum != XFER_BUFFER_LENGTH)
