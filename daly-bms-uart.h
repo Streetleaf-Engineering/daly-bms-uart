@@ -1,6 +1,9 @@
 #ifndef DALY_BMS_UART_H
 #define DALY_BMS_UART_H
 
+#include "Particle.h"
+#include "Arduino.h"
+
 #define XFER_BUFFER_LENGTH 13
 #define MIN_NUMBER_CELLS 1
 #define MAX_NUMBER_CELLS 48
