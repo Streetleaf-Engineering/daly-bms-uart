@@ -148,6 +148,7 @@ bool Daly_BMS_UART::getDischargeChargeMosStatus() // 0x93
         return false;
     }
 
+    /* Old code
     switch (this->my_rxBuffer[4])
     {
     case 0:
@@ -160,6 +161,9 @@ bool Daly_BMS_UART::getDischargeChargeMosStatus() // 0x93
         get.chargeDischargeStatus = "Discharge";
         break;
     }
+    */
+
+    get.chargeDischargeStatus = this->my_rxBuffer[4];
 
     get.chargeFetState = this->my_rxBuffer[5];
     get.disChargeFetState = this->my_rxBuffer[6];

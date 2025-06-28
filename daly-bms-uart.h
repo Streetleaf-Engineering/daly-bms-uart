@@ -1,6 +1,7 @@
 #ifndef DALY_BMS_UART_H
 #define DALY_BMS_UART_H
 
+#include <stdint.h>
 #include "Particle.h"
 #include "Arduino.h"
 
@@ -53,11 +54,11 @@ public:
         float tempAverage; // Average of temp sensors
 
         // data from 0x93
-        String chargeDischargeStatus; // charge/discharge status (0 stationary, 1 charge, 2 discharge)
-        bool chargeFetState;          // charging MOSFET status
-        bool disChargeFetState;       // discharge MOSFET state
-        int bmsHeartBeat;             // BMS life (0~255 cycles)?
-        int resCapacitymAh;           // residual capacity mAH
+        uint32_t chargeDischargeStatus; // charge/discharge status (0 stationary, 1 charge, 2 discharge)
+        bool chargeFetState;            // charging MOSFET status
+        bool disChargeFetState;         // discharge MOSFET state
+        int bmsHeartBeat;               // BMS life (0~255 cycles)?
+        int resCapacitymAh;             // residual capacity mAH
 
         // data from 0x94
         int numberOfCells;    // Cell count
