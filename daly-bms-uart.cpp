@@ -533,8 +533,14 @@ bool Daly_BMS_UART::receiveBytes(void)
     // Clear out the input buffer
     memset(this->my_rxBuffer, 0, XFER_BUFFER_LENGTH);
 
-    // Read bytes from the specified serial interface
-    uint8_t rxByteNum = this->my_serialIntf->readBytes(reinterpret_cast<char*>(this->my_rxBuffer), XFER_BUFFER_LENGTH);
+    // Poll for bytes with a manual timeout to avoid blocking on waitEvent()
+    uint8_t rxByteNum = 0;
+    unsigned long start = millis();
+    while (rxByteNum < XFER_BUFFER_LENGTH && (millis() - start) < 300) {
+        if (this->my_serialIntf->available()) {
+            this->my_rxBuffer[rxByteNum++] = this->my_serialIntf->read();
+        }
+    }
 
     // Make sure we got the correct number of bytes
     if (rxByteNum != XFER_BUFFER_LENGTH)
